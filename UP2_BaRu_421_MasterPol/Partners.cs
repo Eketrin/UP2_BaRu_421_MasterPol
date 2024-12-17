@@ -11,7 +11,8 @@ namespace UP2_BaRu_421_MasterPol
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Linq;
+
     public partial class Partners
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,6 +30,15 @@ namespace UP2_BaRu_421_MasterPol
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Adress { get; set; }
+        public string Discount => $"{CalculateDiscount(Partner_products.Sum(s => s.Num_of_products))}%";
+
+        private int CalculateDiscount(long? totalSum)
+        {
+            if (totalSum > 300000) return 15;
+            if (totalSum > 500000) return 10;
+            if (totalSum > 10000) return 5;
+            return 0;
+        }
         public Nullable<long> INN { get; set; }
         public Nullable<int> Rating { get; set; }
     

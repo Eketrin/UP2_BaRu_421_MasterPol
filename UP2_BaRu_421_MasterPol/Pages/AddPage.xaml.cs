@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace UP2_BaRu_421_MasterPol.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MenuPage.xaml
+    /// Логика взаимодействия для AddPage.xaml
     /// </summary>
-    public partial class MenuPage : Page
+    public partial class AddPage : Page
     {
-        public MenuPage()
+        public AddPage()
         {
             InitializeComponent();
         }

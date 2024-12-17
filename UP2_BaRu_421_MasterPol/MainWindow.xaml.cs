@@ -20,42 +20,35 @@ namespace UP2_BaRu_421_MasterPol
     /// </summary>
     public partial class MainWindow : Window
     {
+        Partners currentPartners = new Partners();
         public MainWindow()
         {
-            // ctrl k c    ctrl k u
+            // ctrl k c       ctrl k u
             InitializeComponent();
-            var context = Entities.GetContext();
-            var currentPartners = context.Partners.ToList();
-            ListPartners.ItemsSource = currentPartners;
-            UpdatePartners();
+
         }
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             if (!(e.Content is Page page)) return;
             this.Title = $"ProjectByRutBai - {page.Title}";
 
-            if (page is Pages.MenuPage)
+            if (page is Pages.PartnersPage)
                 ButtonBack.Visibility = Visibility.Hidden;
             else
                 ButtonBack.Visibility = Visibility.Visible;
-
         }
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Вы уверены что хотите закрыть приложение?", 
                 "Подтвержение закрытия", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.No)
                 e.Cancel = true;
         }
-        private void UpdatePartners()
-        {
-            //загружаем всех пользователей в список
-            var currentUsers = Entities.GetContext().Partners.ToList();
-        }
 
-        private void ButtonBack_OnClick(object sender, RoutedEventArgs e)
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
-            //if (MainFrame.CanGoBack) MainFrame.GoBack();
+            if (MainFrame.CanGoBack) MainFrame.GoBack();
         }
     }
 }
