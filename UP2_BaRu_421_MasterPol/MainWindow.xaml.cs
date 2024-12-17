@@ -22,7 +22,12 @@ namespace UP2_BaRu_421_MasterPol
     {
         public MainWindow()
         {
+            // ctrl k c    ctrl k u
             InitializeComponent();
+            var context = Entities.GetContext();
+            var currentPartners = context.Partners.ToList();
+            ListPartners.ItemsSource = currentPartners;
+            UpdatePartners();
         }
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
@@ -35,10 +40,22 @@ namespace UP2_BaRu_421_MasterPol
                 ButtonBack.Visibility = Visibility.Visible;
 
         }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Вы уверены что хотите закрыть приложение?", 
+                "Подтвержение закрытия", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+                e.Cancel = true;
+        }
+        private void UpdatePartners()
+        {
+            //загружаем всех пользователей в список
+            var currentUsers = Entities.GetContext().Partners.ToList();
+        }
 
         private void ButtonBack_OnClick(object sender, RoutedEventArgs e)
         {
-            if (MainFrame.CanGoBack) MainFrame.GoBack();
+            //if (MainFrame.CanGoBack) MainFrame.GoBack();
         }
     }
 }
