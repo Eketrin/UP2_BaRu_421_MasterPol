@@ -50,8 +50,6 @@
 
                         <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="250" Grid.Row="2" Grid.Column="0"
     HorizontalAlignment="Center" FontSize="18" Text="{Binding Director_name}"/>
-                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="250" Grid.Row="2" Grid.Column="0"
-    HorizontalAlignment="Center" FontSize="18" Text="{Binding Director_middle_name}"/>
 
                         <TextBlock VerticalAlignment="Center" TextAlignment="Left" Width="250" Grid.Row="3" Grid.Column="0"
     HorizontalAlignment="Center" FontSize="18" Text="{Binding Phone}"/>
