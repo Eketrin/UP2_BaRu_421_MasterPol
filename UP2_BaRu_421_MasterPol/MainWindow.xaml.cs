@@ -30,7 +30,7 @@ namespace UP2_BaRu_421_MasterPol
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             if (!(e.Content is Page page)) return;
-            this.Title = $"ProjectByRutBai - {page.Title}";
+            this.Title = $"Мастер пол - {page.Title}";
 
             if (page is Pages.PartnersPage)
                 ButtonBack.Visibility = Visibility.Hidden;

@@ -30,11 +30,11 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Количество реализованного" Binding="{Binding Num_of_products}" Width="*"/>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Num_of_products}" Width="*"/>
                 <DataGridTextColumn Header="Дата реализации" Binding="{Binding Date_of_sale}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock x:Name="Partner" Width="200" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="Partner" Width="200" HorizontalAlignment="Left" Margin="10,0,0,0"/>
 
     </Grid>
 </Page>

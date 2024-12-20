@@ -20,8 +20,8 @@ namespace UP2_BaRu_421_MasterPol
         {
             this.Partner_products = new HashSet<Partner_products>();
         }
-        public string Discount => $"{CalculateDiscount(Partner_products.Sum(s => s.Num_of_products))}%";
 
+        public string Discount => $"{CalculateDiscount(Partner_products.Sum(s => s.Num_of_products))}%";
         public string Type_ => $"{Partner_type.Name_Type}";
         private int CalculateDiscount(long? totalSum)
         {

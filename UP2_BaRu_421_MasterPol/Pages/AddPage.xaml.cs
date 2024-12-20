@@ -28,12 +28,12 @@ namespace UP2_BaRu_421_MasterPol.Pages
             if (flag)
             {
                 ButtonSave.Visibility = Visibility.Visible;
-                ButtonRedact.Visibility = Visibility.Hidden;
+                ButtonChangeData.Visibility = Visibility.Hidden;
             }
             else
             {
                 ButtonSave.Visibility = Visibility.Hidden;
-                ButtonRedact.Visibility = Visibility.Visible;
+                ButtonChangeData.Visibility = Visibility.Visible;
             }
             if (currentPartners != null)
             {
@@ -47,7 +47,16 @@ namespace UP2_BaRu_421_MasterPol.Pages
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TextBoxName.Text) || string.IsNullOrEmpty(TypeBox.Text) || string.IsNullOrEmpty(RatingBox.Text) || string.IsNullOrEmpty(TextBoxAdress.Text) || string.IsNullOrEmpty(TextBoxAdress.Text) || string.IsNullOrEmpty(TextBoxSecond.Text) || string.IsNullOrEmpty(TextBoxFirst.Text) || string.IsNullOrEmpty(TextBoxThird.Text) || string.IsNullOrEmpty(TextBoxPhone.Text) || string.IsNullOrEmpty(TextBoxEmail.Text))
+            if (string.IsNullOrEmpty(TextBoxName.Text) || 
+                string.IsNullOrEmpty(TypeBox.Text) || 
+                string.IsNullOrEmpty(RatingBox.Text) || 
+                string.IsNullOrEmpty(TextBoxAdress.Text) || 
+                string.IsNullOrEmpty(TextBoxAdress.Text) || 
+                string.IsNullOrEmpty(TextBoxSecond.Text) || 
+                string.IsNullOrEmpty(TextBoxFirst.Text) || 
+                string.IsNullOrEmpty(TextBoxThird.Text) || 
+                string.IsNullOrEmpty(TextBoxPhone.Text) || 
+                string.IsNullOrEmpty(TextBoxEmail.Text))
             {
                 MessageBox.Show("Заполните все вышеуказанные поля!");
                 return;

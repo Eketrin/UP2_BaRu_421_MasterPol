@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UP2_BaRu_421_MasterPol"
         mc:Ignorable="d"
-        Title="Мастер пол" Height="600" Width="850" Closing="MainWindow_Closing">
+        Title="MasterPol" Height="600" Width="850" Closing="MainWindow_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
