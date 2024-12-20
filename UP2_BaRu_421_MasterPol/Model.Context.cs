@@ -31,12 +31,13 @@ namespace UP2_BaRu_421_MasterPol
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Material_type> Material_type { get; set; }
         public virtual DbSet<Partner_products> Partner_products { get; set; }
         public virtual DbSet<Partners> Partners { get; set; }
         public virtual DbSet<Product_type> Product_type { get; set; }
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Partner_type> Partner_type { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

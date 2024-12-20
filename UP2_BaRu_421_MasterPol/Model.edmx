@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Material_type">
           <Key>
             <PropertyRef Name="ID_type_material" />
@@ -23,12 +23,19 @@
           <Property Name="Num_of_products" Type="bigint" />
           <Property Name="Date_of_sale" Type="date" />
         </EntityType>
+        <EntityType Name="Partner_type">
+          <Key>
+            <PropertyRef Name="ID_Type" />
+          </Key>
+          <Property Name="ID_Type" Type="int" Nullable="false" />
+          <Property Name="Name_Type" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="Partners">
           <Key>
             <PropertyRef Name="ID_partner" />
           </Key>
           <Property Name="ID_partner" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Type" Type="varchar(max)" />
+          <Property Name="Type" Type="int" />
           <Property Name="Name" Type="varchar(max)" />
           <Property Name="Director_name" Type="varchar(max)" />
           <Property Name="Director_middle_name" Type="varchar(max)" />
@@ -92,6 +99,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Partners_Partner_type">
+          <End Role="Partner_type" Type="Self.Partner_type" Multiplicity="0..1" />
+          <End Role="Partners" Type="Self.Partners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner_type">
+              <PropertyRef Name="ID_Type" />
+            </Principal>
+            <Dependent Role="Partners">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Products_Material_type">
           <End Role="Material_type" Type="Self.Material_type" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -119,6 +138,7 @@
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="Material_type" EntityType="Self.Material_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Partner_products" EntityType="Self.Partner_products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partner_type" EntityType="Self.Partner_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Partners" EntityType="Self.Partners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_type" EntityType="Self.Product_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -131,6 +151,10 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="Partner_products" EntitySet="Partner_products" />
           </AssociationSet>
+          <AssociationSet Name="FK_Partners_Partner_type" Association="Self.FK_Partners_Partner_type">
+            <End Role="Partner_type" EntitySet="Partner_type" />
+            <End Role="Partners" EntitySet="Partners" />
+          </AssociationSet>
           <AssociationSet Name="FK_Products_Material_type" Association="Self.FK_Products_Material_type">
             <End Role="Material_type" EntitySet="Material_type" />
             <End Role="Products" EntitySet="Products" />
@@ -140,8 +164,7 @@
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -171,7 +194,7 @@
             <PropertyRef Name="ID_partner" />
           </Key>
           <Property Name="ID_partner" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Director_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Director_middle_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -182,6 +205,7 @@
           <Property Name="INN" Type="Int64" />
           <Property Name="Rating" Type="Int32" />
           <NavigationProperty Name="Partner_products" Relationship="Self.FK_Partner_products_Partners" FromRole="Partners" ToRole="Partner_products" />
+          <NavigationProperty Name="Partner_type" Relationship="Model.FK_Partners_Partner_type" FromRole="Partners" ToRole="Partner_type" />
         </EntityType>
         <EntityType Name="Product_type">
           <Key>
@@ -205,16 +229,6 @@
           <NavigationProperty Name="Material_type" Relationship="Self.FK_Products_Material_type" FromRole="Products" ToRole="Material_type" />
           <NavigationProperty Name="Partner_products" Relationship="Self.FK_Partner_products_Products" FromRole="Products" ToRole="Partner_products" />
           <NavigationProperty Name="Product_type" Relationship="Self.FK_Products_Product_type" FromRole="Products" ToRole="Product_type" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Products_Material_type">
           <End Role="Material_type" Type="Self.Material_type" Multiplicity="0..1" />
@@ -270,7 +284,6 @@
           <EntitySet Name="Partners" EntityType="Self.Partners" />
           <EntitySet Name="Product_type" EntityType="Self.Product_type" />
           <EntitySet Name="Products" EntityType="Self.Products" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_Products_Material_type" Association="Self.FK_Products_Material_type">
             <End Role="Material_type" EntitySet="Material_type" />
             <End Role="Products" EntitySet="Products" />
@@ -287,7 +300,43 @@
             <End Role="Product_type" EntitySet="Product_type" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="Partner_type" EntityType="Model.Partner_type" />
+          <EntitySet Name="sysdiagrams" EntityType="Model.sysdiagrams" />
+          <AssociationSet Name="FK_Partners_Partner_type" Association="Model.FK_Partners_Partner_type">
+            <End Role="Partner_type" EntitySet="Partner_type" />
+            <End Role="Partners" EntitySet="Partners" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Partner_type">
+          <Key>
+            <PropertyRef Name="ID_Type" />
+          </Key>
+          <Property Name="ID_Type" Type="Int32" Nullable="false" />
+          <Property Name="Name_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Partners" Relationship="Model.FK_Partners_Partner_type" FromRole="Partner_type" ToRole="Partners" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Partners_Partner_type">
+          <End Type="Model.Partner_type" Role="Partner_type" Multiplicity="0..1" />
+          <End Type="Model.Partners" Role="Partners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner_type">
+              <PropertyRef Name="ID_Type" />
+            </Principal>
+            <Dependent Role="Partners">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -352,14 +401,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Partner_type">
+            <EntityTypeMapping TypeName="Model.Partner_type">
+              <MappingFragment StoreEntitySet="Partner_type">
+                <ScalarProperty Name="Name_Type" ColumnName="Name_Type" />
+                <ScalarProperty Name="ID_Type" ColumnName="ID_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

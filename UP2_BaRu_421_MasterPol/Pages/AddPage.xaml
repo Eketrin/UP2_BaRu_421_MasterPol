@@ -9,61 +9,49 @@
       Title="AddPage">
 
     <Grid>
-        <Grid >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40*"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="44"/>
-                <RowDefinition Height="40*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="51"/>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Тип Компании" Grid.Column="1" Margin="10,0,10,0" TextAlignment="Left" Height="21"/>
+        <TextBlock Text="Наименование" Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" TextAlignment="Left" Height="21" />
+        <TextBlock Text="Фамилия Директора" Grid.Row="2" Grid.Column="1" Margin="10,0,0,0"  TextAlignment="Left" Height="21" />
+        <TextBlock Text="Имя Директора" Grid.Row="3" Grid.Column="1" Margin="10,0,0,0"  TextAlignment="Left" Height="21" />
+        <TextBlock Text="Отчество Директора" Grid.Row="4" Grid.Column="1" Margin="10,0,0,0"  TextAlignment="Left" Height="21" />
+        <TextBlock Text="Адрес" Grid.Row="5" Grid.Column="1" Margin="10,0,0,0"  TextAlignment="Left" Height="21" />
+        <TextBlock Text="Телефон" Grid.Row="6" Grid.Column="1" Margin="10,0,0,0"  TextAlignment="Left" Height="21" />
+        <TextBlock Text="Email" Grid.Row="7" Grid.Column="1" Margin="10,0,0,0"  TextAlignment="Left" Height="21" />
+        <TextBlock Text="Рэйтинг" Grid.Row="8" Grid.Column="1" Margin="10,0,0,0"  TextAlignment="Left" Height="21" />
 
-            <TextBlock Text="Тип" Grid.Column="1" Grid.Row="1"/>
-            <TextBox Text="{Binding Login}" ToolTip="Введите тип компании" 
-                     Background="Transparent" Grid.Column="2" Grid.Row="1"  Height="40"/>
 
-            <TextBlock Text="Название" Grid.Column="1" Grid.Row="2"/>
-            <TextBox Text="{Binding Password}" ToolTip="Введите название компании" 
-                     Background="Transparent" Grid.Column="2" Grid.Row="2" Height="40"/>
-           
-            <TextBlock Text="ФИО директора" Grid.Column="1" Grid.Row="3"/>
-            <TextBox Text="{Binding FIO}" Grid.Column="2" Grid.Row="3" 
-                     Background="Transparent" ToolTip="Введите ФИО директора" Height="40"/>
-
-            <TextBlock Text="Почта" Grid.Column="1" Grid.Row="4"/>
-            <TextBox Text="{Binding FIO}" Grid.Column="2" Grid.Row="4" 
-                     Background="Transparent" ToolTip="Введите почту для связи" Height="40"/>
-
-            <TextBlock Text="Телефон" Grid.Column="1" Grid.Row="5"/>
-            <TextBox Text="{Binding Photo}" Grid.Column="2" Grid.Row="5" 
-                     Background="Transparent" ToolTip="Введите номер телефона" Height="40"/>
+        <ComboBox x:Name="TypeBox" DisplayMemberPath="Name_Type" Grid.Row="0" Grid.Column="2" ToolTip="Выберите тип компании"/>
+        <TextBox ToolTip="Введите наименование компании" x:Name="TextBoxName" Text="{Binding Name}" Grid.Row="1" Grid.Column="2"/>
+        <TextBox ToolTip="Введите Фамилию" x:Name="TextBoxSecond" Text="{Binding Director_name}" Grid.Row="2" Grid.Column="2"/>
+        <TextBox ToolTip="Введите Имя" x:Name="TextBoxFirst" Text="{Binding Director_middle_name}" Grid.Row="3" Grid.Column="2"/>
+        <TextBox ToolTip="Введите Отчество" x:Name="TextBoxThird" Text="{Binding Director_last_name}" Grid.Row="4" Grid.Column="2"/>
+        <TextBox ToolTip="Введите Адрес" x:Name="TextBoxAdress" Text="{Binding Adress}" Grid.Row="5" Grid.Column="2"/>
+        <TextBox ToolTip="Введите контактный телефон" x:Name="TextBoxPhone" Text="{Binding Phone}" Grid.Row="6" Grid.Column="2"/>
+        <TextBox ToolTip="Введите адрес электронной почты" x:Name="TextBoxEmail" Text="{Binding Email}" Grid.Row="7" Grid.Column="2"/>
+        <TextBox ToolTip="Введите рейтинг компании" x:Name="RatingBox"  Text="{Binding Rating}" Grid.Row="8" Grid.Column="2"/>
 
 
 
-            <TextBlock Text="Адрес" Grid.Column="1" Grid.Row="6"/>
-            <TextBox Text="{Binding Photo}" Grid.Column="2" Grid.Row="6" 
-                     Background="Transparent" ToolTip="Введите адрес" Height="40"/>
-            <TextBlock Text="ИНН" Grid.Column="1" Grid.Row="7"/>
-            <TextBox Text="{Binding Photo}" Grid.Column="2" Grid.Row="7" 
-                     Background="Transparent" ToolTip="Введите ИНН" Height="40"/>
-            <TextBlock Text="Рейтинг" Grid.Column="1" Grid.Row="8"/>
-            <TextBox Text="{Binding Photo}" Grid.Column="2" Grid.Row="8" 
-                     Background="Transparent" ToolTip="Введите рейтинг" Height="40"/>
+        <Button Name="ButtonSave" Content="Добавить" Grid.Row="8" Click="ButtonSave_Click" Margin="311,43,0,12" HorizontalAlignment="Left" Grid.Column="2" Width="158" Grid.RowSpan="2"/>
+        <Button Name="ButtonChangeData" Content="Сохранить" Grid.Row="9" Click="ButtonChangeData_Click" Margin="0,0,0,10" HorizontalAlignment="Left" Grid.Column="2" Width="146"/>
 
-            <Button Name="ButtonSave" Content="Сохранить" Grid.Row="9" Grid.Column="2" HorizontalAlignment="Right" Click="ButtonSave_Click" Width="180" ToolTip="Нажмите, чтобы сохранить"/>
-            <Button Name="ButtonCancel" Content="Отмена" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" Click="ButtonCancel_Click" Width="180" ToolTip="Нажмите, чтобы отменить создание"/>
-        </Grid>
     </Grid>
 </Page>

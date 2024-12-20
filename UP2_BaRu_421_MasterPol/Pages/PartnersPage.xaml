@@ -9,7 +9,11 @@
       Title="PartnersPage">
 
     <Grid>
-        <ListView Name="ListPartners" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="378"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <ListView Name="ListPartners" Grid.Row="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                   HorizontalContentAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -35,7 +39,7 @@
 
                             <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
                                 <TextBlock VerticalAlignment="Center" FontSize="20"
-                                           TextWrapping="Wrap" Text="{Binding Type}"  HorizontalAlignment="Left"/>
+                                           TextWrapping="Wrap" Text="{Binding Type_}"  HorizontalAlignment="Left"/>
                                 <Label Content="|" FontSize="20"/>
                                 <TextBlock VerticalAlignment="Center" Width="313"
                                            FontSize="20" Text="{Binding Name}" TextAlignment="Left"/>
@@ -64,5 +68,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="Add" Grid.Row="1" Content="Добавить" ToolTip="Добавить элемент в базу" Height="40" HorizontalAlignment="Left" Click="Add_Click" Margin="690,10,0,50" Width="100"/>
+        <Button x:Name="Realise" Grid.Row="1" Content="Реализация продукции" ToolTip="Просмотреть историю партнёра" Height="40" HorizontalAlignment="Left" Click="Realise_Click" Margin="10,10,0,50" Width="197"/>
+        <Button x:Name="Redact" Grid.Row="1" Content="Редактировать" ToolTip="Отредактировать элемент базы" Height="40" HorizontalAlignment="Left" Click="Redact_Click" Margin="529,10,0,50" Width="142"/>
+
+
     </Grid>
 </Page>

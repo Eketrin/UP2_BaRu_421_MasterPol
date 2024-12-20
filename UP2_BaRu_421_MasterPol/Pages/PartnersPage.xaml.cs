@@ -34,5 +34,30 @@ namespace UP2_BaRu_421_MasterPol.Pages
             //загружаем всех пользователей в список
             var currentUsers = Entities.GetContext().Partners.ToList();
         }
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddPage(null, true));
+        }
+
+
+        private void Realise_Click(object sender, RoutedEventArgs e)
+        {
+
+            var selectedItem = ListPartners.SelectedItem as Partners;
+            if (selectedItem != null)
+            {
+                NavigationService.Navigate(new Product(selectedItem));
+            }
+            else
+            {
+                MessageBox.Show("Выберите партнера");
+            }
+        }
+
+        private void Redact_Click(object sender, RoutedEventArgs e)
+        {
+            Partners partners = ListPartners.SelectedItem as Partners;
+            NavigationService?.Navigate(new AddPage(partners, false));
+        }
     }
 }

@@ -20,18 +20,9 @@ namespace UP2_BaRu_421_MasterPol
         {
             this.Partner_products = new HashSet<Partner_products>();
         }
-    
-        public int ID_partner { get; set; }
-        public string Type { get; set; }
-        public string Name { get; set; }
-        public string Director_name { get; set; }
-        public string Director_middle_name { get; set; }
-        public string Director_last_name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Adress { get; set; }
         public string Discount => $"{CalculateDiscount(Partner_products.Sum(s => s.Num_of_products))}%";
 
+        public string Type_ => $"{Partner_type.Name_Type}";
         private int CalculateDiscount(long? totalSum)
         {
             if (totalSum > 300000) return 15;
@@ -39,10 +30,20 @@ namespace UP2_BaRu_421_MasterPol
             if (totalSum > 10000) return 5;
             return 0;
         }
+        public int ID_partner { get; set; }
+        public Nullable<int> Type { get; set; }
+        public string Name { get; set; }
+        public string Director_name { get; set; }
+        public string Director_middle_name { get; set; }
+        public string Director_last_name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Adress { get; set; }
         public Nullable<long> INN { get; set; }
         public Nullable<int> Rating { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partner_products> Partner_products { get; set; }
+        public virtual Partner_type Partner_type { get; set; }
     }
 }
